@@ -16,6 +16,15 @@ app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 
+connectDb()
+  .then(() => {
+    console.log("Connection to DB established...");
+    app.listen(9000, () => {
+      console.log("Server is listening on port: 9000 ");
+    });
+  })
+  .catch((err) => console.error("Connection to Db is not possible"));
+
 // `app.post("/signup", async (req, res) => {`
 //   try {
 //     //validation of data
@@ -142,11 +151,3 @@ app.use("/", requestRouter);
 //     res.status(400).send("something went wrong");
 //   }
 // });
-connectDb()
-  .then(() => {
-    console.log("Connection to DB established...");
-    app.listen(9000, () => {
-      console.log("Server is listening on port: 9000 ");
-    });
-  })
-  .catch((err) => console.error("Connection to Db is not possible"));
